@@ -2,7 +2,11 @@ const http = require('http');
 const fs = require('fs'); // file system
 const url = require('url'); // url
 
+// ES module, CommonJs (import export system)
+
 // Create, Read, Update, Delete
+// nodemon -> package npm (old=> node index.js, advance=> nodemon index)
+// 1. cmd (run as administrate) (window key -> search(cmd), 2. npm install -g nodemon )
 
 // File where data will be stored
 const DATA_FILE = './data.json';
@@ -31,10 +35,6 @@ const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const path = parsedUrl.pathname;
   const method = req.method;
-  console.log(parsedUrl);
-  res.end("here response ending...")
-  
-  return;
 
   // Set common headers
   res.setHeader('Content-Type', 'application/json');
@@ -47,11 +47,12 @@ const server = http.createServer((req, res) => {
   }
 
   // Route: Create New Item
+  // button.eventListner('click', ()=>{})
   else if (method === 'POST' && path === '/items') {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-    });
+    });    
 
     req.on('end', () => {
       const newItem = JSON.parse(body);
