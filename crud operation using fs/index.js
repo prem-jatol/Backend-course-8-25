@@ -9,7 +9,7 @@ const url = require('url'); // url
 // 1. cmd (run as administrate) (window key -> search(cmd), 2. npm install -g nodemon )
 
 // File where data will be stored
-const DATA_FILE = './data.json';
+const DATA_FILE = './public/data.json';
 
 // js -> Asynchronus / Synchronus
 // writeFile => await fs.writeFile(fath_name, data, (err)=> {if(err) console.log(err)})
@@ -35,6 +35,7 @@ const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const path = parsedUrl.pathname;
   const method = req.method;
+  
 
   // Set common headers
   res.setHeader('Content-Type', 'application/json');
@@ -52,7 +53,7 @@ const server = http.createServer((req, res) => {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-    });    
+    });
 
     req.on('end', () => {
       const newItem = JSON.parse(body);
@@ -67,6 +68,8 @@ const server = http.createServer((req, res) => {
 
   // Route: Update Item by ID
   else if (method === 'PUT' && path.startsWith('/items/')) {
+    // "/items/8870378978"=> ['', 'items', '8870378978']
+    // const arr = ['', 'items', '8870378978'] => arr[2] = 87897887843
     const id = parseInt(path.split('/')[2]);
     let body = '';
     req.on('data', chunk => {
@@ -76,16 +79,30 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       const updatedItem = JSON.parse(body);
       const items = readData();
+      // items.map(data, i)
+      // items = [{}, {}, {}].finIndex((item, i )=> item.idv === id )
+      // const arrowFunc = () => 
+        // ()=> {r}
+          //  (a , b) => a+b
+          // (a, b)=> (a+b)
       const index = items.findIndex(item => item.id === id);
+      console.log("index value:", index);
+  
+      // index = 0 !== -1
 
-      if (index !== -1) {
+      if (index === -1) {
+         res.writeHead(404);
+        res.end(JSON.stringify({ message: 'Item Not Found' }));
+      } else {
+    //     {
+    // item: "Speaker",
+    // price: "42423",
+    // id: 1752248255403,
+    //     }
         items[index] = { ...items[index], ...updatedItem };
         writeData(items);
         res.writeHead(200);
         res.end(JSON.stringify({ message: 'Item Updated', item: items[index] }));
-      } else {
-        res.writeHead(404);
-        res.end(JSON.stringify({ message: 'Item Not Found' }));
       }
     });
   }
@@ -94,6 +111,11 @@ const server = http.createServer((req, res) => {
   else if (method === 'DELETE' && path.startsWith('/items/')) {
     const id = parseInt(path.split('/')[2]);
     const items = readData();
+    // const newArray = items.filter(
+    //   (item, i)=>{
+    //     return items.id !== id
+    //   }
+    // )
     const newItems = items.filter(item => item.id !== id);
 
     if (items.length === newItems.length) {
