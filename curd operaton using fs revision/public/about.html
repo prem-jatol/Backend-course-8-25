@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset and Body Styling */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #374151; /* Dark gray text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            padding: 20px; /* Padding around the content for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        /* Main Container Styling */
+        .container {
+            background-color: #ffffff; /* White background for the content box */
+            border-radius: 16px; /* Large rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+            padding: 40px; /* Ample padding inside the container */
+            max-width: 800px; /* Max width for content readability */
+            width: 100%; /* Full width on smaller screens */
+            text-align: center; /* Center align text within the container */
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 2.5rem; /* Large heading font size */
+            color: #1f2937; /* Darker gray for heading */
+            margin-bottom: 20px; /* Space below heading */
+            font-weight: 700; /* Bold font weight */
+        }
+
+        /* Paragraph Styling */
+        p {
+            font-size: 1.1rem; /* Slightly larger paragraph text */
+            line-height: 1.7; /* Good line height for readability */
+            margin-bottom: 15px; /* Space between paragraphs */
+            color: #4b5563; /* Medium gray for paragraph text */
+        }
+
+        /* Last paragraph margin adjustment */
+        p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Image/Icon Styling (Placeholder) */
+        .icon {
+            width: 80px; /* Size of the icon */
+            height: 80px;
+            background-color: #6366f1; /* Primary color background for icon */
+            border-radius: 50%; /* Circular icon */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px auto; /* Center and add space below */
+            font-size: 3rem; /* Icon font size */
+            color: #ffffff; /* White icon color */
+            font-weight: 600;
+        }
+
+        /* Footer Styling */
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #6b7280; /* Lighter gray for footer text */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px; /* Reduce padding on smaller screens */
+            }
+            h1 {
+                font-size: 2rem; /* Adjust heading size */
+            }
+            p {
+                font-size: 1rem; /* Adjust paragraph size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px; /* Less padding on very small screens */
+            }
+            .container {
+                padding: 20px; /* Further reduce padding */
+                border-radius: 12px; /* Slightly smaller rounded corners */
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+            .icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">✨</div> <!-- Simple icon using an emoji -->
+        <h1>About Our Vision</h1>
+        <p>
+            Welcome to our journey! We are a passionate team dedicated to creating innovative solutions that empower individuals and businesses. Our mission is to simplify complex challenges and deliver exceptional value through technology and creativity.
+        </p>
+        <p>
+            Founded on the principles of collaboration, integrity, and continuous improvement, we strive to build products and services that not only meet but exceed expectations. We believe in fostering a culture where ideas flourish and every team member contributes to our collective success.
+        </p>
+        <p>
+            Our commitment extends beyond just our offerings; we are deeply invested in our community and aim to make a positive impact through our work. Thank you for being a part of our story. We look forward to growing with you!
+        </p>
+        <div class="footer">
+            &copy; 2025 Your Company Name. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
