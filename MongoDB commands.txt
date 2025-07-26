@@ -1,0 +1,156 @@
+// Switch to or create a database named 'mydb'
+use mydb
+
+db.collection.insertOne(document): Inserts a single document into a collection.
+
+db.users.insertOne({
+  name: "Alice",
+  age: 30,
+  email: "alice@example.com",
+  status: "active"
+})
+
+*********
+
+db.collection.insertMany([document1, document2, ...]): Inserts multiple documents into a collection.
+
+db.users.insertMany([
+  { name: "Bob", age: 24, email: "bob@example.com", status: "inactive" },
+  { name: "Charlie", age: 35, email: "charlie@example.com", status: "active", interests: ["coding", "reading"] },
+  { name: "David", age: 28, email: "david@example.com", status: "active", interests: ["sports", "music"] }
+])
+
+***********
+
+db.collection.find(query, projection): Selects documents in a collection.
+db.users.find({}) -> Retrieve all documents
+
+// Find by id
+db.users.find({ _id : ObjectId('xxxxxxxxxxxxxxxx')})
+
+// Find users with age greater than 25
+db.users.find({ age: { $gt: 25 } })
+
+// Find users with status 'active' and age less than or equal to 30
+db.users.find({ status: "active", age: { $lte: 30 } })
+
+// Return only name and email fields (exclude _id)
+db.users.find({}, { name: 1, email: 1, _id: 0 })
+
+// Sort by status ascending, then by age descending
+db.users.find().sort({ status: 1, age: -1 })
+
+// Get only the first 3 users
+db.users.find().limit(3)
+
+// Skip the first 2 users and return the rest
+db.users.find().skip(2)
+
+// Find active users, sort by age descending, skip 1, limit 2, and return only name and age
+db.users.find(
+  { status: "active" },
+  { name: 1, age: 1, _id: 0 }
+).sort({ age: -1 }).skip(1).limit(2)
+
+// Find one user named "Alice"
+db.users.findOne({ name: "Alice" })
+
+***********
+
+// Update Bob's status to 'active' and add a new field 'city'
+db.users.updateOne(
+  { name: "Bob" },
+  { $set: { status: "active", city: "New York" } }
+)
+
+// Remove the 'email' field from David's document
+db.users.updateOne(
+  { name: "David" },
+  { $unset: { email: "" } }
+
+// Add 'gaming' to Charlie's interests
+db.users.updateOne(
+  { name: "Charlie" },
+  { $push: { interests: "gaming" } }
+)
+
+// Remove 'reading' from Charlie's interests
+db.users.updateOne(
+  { name: "Charlie" },
+  { $pull: { interests: "reading" } }
+)
+
+// Change the status of all active users to 'online'
+db.users.updateMany(
+  { status: "active" },
+  { $set: { status: "online" } }
+)
+
+// Replace Bob's entire document
+db.users.replaceOne(
+  { name: "Bob" },
+  { username: "bobby_cool", registered: new Date() }
+)
+
+***************
+
+// Delete the user named "Alice"
+db.users.deleteOne({ name: "Alice" })
+
+// Delete all users with age less than 25
+db.users.deleteMany({ age: { $lt: 25 } })
+
+// Delete all documents in the collection
+db.users.deleteMany({})
+
+***********
+
+db.students.aggregate([
+  {
+    $lookup: {
+      from: "teachers",
+      localField: "teacher_id",
+      foreignField: "_id",
+      as: "teacher_data"
+    }
+  }
+])
+
+// This command gives you all students' data along with their respective teachers' data.
+// If you want a particular student's data with their teacher, you should try this command:
+db.students.aggregate([
+  {
+    $match: {
+      _id: ObjectId("6884fedaddc234193d3bb282")
+    }
+  },
+  {
+    $lookup: {
+      from: "teachers",
+      localField: "teacher_id",
+      foreignField: "_id",
+      as: "teacher_data"
+    }
+  }
+])
+
+// this commond for mongoose
+// user.findOne({_id}).populate('teacher_id")
+
+
+*******************
+
+// Database and Collection Management
+show dbs
+
+// Explicitly creates a new collection. 
+db.createCollection("products")
+
+// Lists all collections in the current database.
+show collections
+
+// Deletes an entire collection.
+db.users.drop()
+
+// Deletes the current database.
+db.dropDatabase()
