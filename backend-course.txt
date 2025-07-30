@@ -1,0 +1,30 @@
+1. What is Backend?
+2. How to create server using http module?
+3. CRUD operation using fs module?
+4. Error handling like Callback, Promise (.then() .catch()), Async/await
+5. What is MongoDB and Difference in NoSQL vs SQL? with a example.
+6. How to create collections and documents in MongoDB?
+7. What is MongoDB Commands?
+8. What is Express.js and how to create a server?
+9. How to create routes using express.js?
+10. how to handle error in express?
+11. How to connect database using mongoose and make api?
+12. How to create mongoose Model and Schema with validation?
+13. What is MVC (Controllers, Routes, and Models) architecture?
+14. How to create a RESTfull api with CRUD operation?
+15. How to do Pagination, Sorting, Filtering and Populate in api?
+16. How to upload a single or multiple file in database?
+17. What is Authentication and Authorization and What is JWToken?
+18. how to encrypt password and save data in JWT?
+19. What is middleware and how to Authenticate protected routes?
+20. What is refresh token implementation concept?
+21. What is dotenv and why use it?
+22. What is Redis caching concepts and how to do it?
+23. How to make a task manager api project?
+24. How to use firebase for realtime database update?
+25. What is WebSockets and how to use it?
+26. How to make a Real-time chat application using WebSockets?
+27. How to send email using nodemailer?
+28. How to implement payment gateway using Razorpay or Stripe?
+29. A Backend project with AI Tool.
+30. how to deploy our backend for free ?
