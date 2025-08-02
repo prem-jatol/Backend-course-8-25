@@ -7,7 +7,7 @@
 7. What is MongoDB Commands?
 8. What is Express.js and how to create a server?
 9. How to create routes using express.js?
-10. how to handle error in express?
+10. how to handle error in express? (try{} catch(err){})
 11. How to connect database using mongoose and make api?
 12. How to create mongoose Model and Schema with validation?
 13. What is MVC (Controllers, Routes, and Models) architecture?
