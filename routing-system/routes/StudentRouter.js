@@ -1,6 +1,6 @@
-const Router = require("express");
+const express = require("express");
 
-const StudentRouter = Router();
+const StudentRouter = express.Router();
 
 StudentRouter.get("/", (req, res)=>{
     // console.log(req);
