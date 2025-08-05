@@ -18,5 +18,4 @@ StudentRouter.get("/update", (req, res)=>{
     res.send("this is student get api for update")
 })
 
-
 module.exports = StudentRouter;
