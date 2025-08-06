@@ -11,7 +11,7 @@ app.use(express.json())
 //     dbName: "shool",
 // })
 
-// app.get('/', (req, res)=>{})
+// app.get('/admin', (req, res)=>{})
 
 app.use('/admin', AdminRouter)
 
