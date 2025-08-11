@@ -7,8 +7,16 @@ const AdminController = require('../controllers/AdminController');
 const AdminRouter = express.Router();
 
 AdminRouter.get("/", async (req, res) => {
-    const admins = await AdminModel.find();
-    res.send({msg: "admins fetched", admins})
+    const page = req.query.page;
+    const limit = req.query.limit;
+    const result = new AdminController().adminPagination(page, limit);
+    result
+    .then((success)=>{
+        res.send(success)
+    })
+    .catch(
+        (err)=> res.send(err)
+    )
 })
 
 AdminRouter.get('/:id', async (req, res)=>{
