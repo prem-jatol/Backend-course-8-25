@@ -15,6 +15,10 @@ const adminSchema = new mongoose.Schema({
     password: {
         type: Number,
         require: true,
+    },
+    teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Teacher"
     }
 }, {
     timestamps: true

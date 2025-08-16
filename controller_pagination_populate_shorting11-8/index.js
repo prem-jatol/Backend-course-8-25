@@ -13,7 +13,7 @@ app.use(express.json())
 
 // app.get('/admin', (req, res)=>{})
 
-app.use('/admin', AdminRouter)
+app.use('/admin', AdminRouter);
 
 mongoose.connect('mongodb://localhost:27017/shool')
 .then(

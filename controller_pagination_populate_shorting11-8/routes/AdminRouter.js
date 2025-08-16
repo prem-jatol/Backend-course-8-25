@@ -19,19 +19,39 @@ AdminRouter.get("/", async (req, res) => {
         )
 })
 
-AdminRouter.get("/sorting", 
-    (req, res)=>{
+AdminRouter.get("/sorting",
+    (req, res) => {
         const sortBy = req.query.sortBy || 'name';
         const order = req.query.order === 'desc' ? -1 : 1;
         const result = new AdminController().adminSorting(sortBy, order);
         result
             .then(
-                (success)=>{
+                (success) => {
                     res.send(success)
                 }
             )
             .catch(
-                (err)=>{
+                (err) => {
+                    res.send(err)
+                }
+            )
+    }
+)
+
+AdminRouter.get("/filter",
+    (req, res) => {
+        const category = req.query.category;
+        const minValue = req.query.minValue;
+        const maxValue = req.query.maxValue;
+        const result = new AdminController().adminFilter(category, minValue, maxValue);
+        result
+            .then(
+                (success) => {
+                    res.send(success)
+                }
+            )
+            .catch(
+                (err) => {
                     res.send(err)
                 }
             )

@@ -43,6 +43,29 @@ class AdminController {
             }
         )
     }
+
+    adminFilter = (category, min, max) => {
+        return new Promise(
+            async (res, rej) => {
+                try {                    
+                    const filter = {};
+                    filter.category = category;
+
+                    filter.password = {
+                        $gte : min,
+                        $lte: max
+                    }
+                    console.log(filter);
+                    
+                    // const result = await AdminModel.find({password: {$lte : max, $gte : min}});
+                    const result = await AdminModel.find(filter);
+                    res({msg: `Filterd by ${category}`, data : result})
+                } catch (err) {
+                    rej({ msg: "Internal server error", status: 0 })
+                }
+            }
+        )
+    }
 }
 
 module.exports = AdminController;
