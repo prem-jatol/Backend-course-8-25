@@ -1,6 +1,46 @@
 const AdminModel = require("../models/AdminModel");
 
 class AdminController {
+    adminList = (page, limit, sortBy, order, category, min, max) => {
+        return new Promise(
+            async (res, rej) => {
+                try {
+                    const skip = (page - 1) * limit;
+
+                    let filter = {};
+                    if (category) {
+                        filter.category = category;
+                    }
+                    if (min && max) {
+                        filter.password = {
+                            $gte: parseInt(min),
+                            $lte: parseInt(max)
+                        };
+                    }
+
+                    const admins = await AdminModel.find(filter)
+                        .populate('teacher', 'name')
+                        .sort({ [sortBy]: order })
+                        .skip(skip)
+                        .limit(limit);
+
+                    const total = await AdminModel.countDocuments(filter);
+
+                    res({
+                        page,
+                        totalPages: Math.ceil(total / limit),
+                        totalAdmins: total,
+                        total: limit,
+                        data: admins
+                    });
+                } catch (err) {
+                    console.log(err.message);
+                    rej({ msg: "Internal server error", status: 0 })
+                }
+            }
+        )
+    }
+
     adminPagination = (page, limit) => {
         return new Promise(
             async (resolve, reject) => {
@@ -47,19 +87,21 @@ class AdminController {
     adminFilter = (category, min, max) => {
         return new Promise(
             async (res, rej) => {
-                try {                    
+                try {
                     const filter = {};
                     filter.category = category;
 
-                    filter.password = {
-                        $gte : min,
-                        $lte: max
+                    if (min && max) {
+                        filter.password = {
+                            $gte: min,
+                            $lte: max
+                        }
                     }
                     console.log(filter);
-                    
+
                     // const result = await AdminModel.find({password: {$lte : max, $gte : min}});
                     const result = await AdminModel.find(filter);
-                    res({msg: `Filterd by ${category}`, data : result})
+                    res({ msg: `Filterd by ${category}`, data: result })
                 } catch (err) {
                     rej({ msg: "Internal server error", status: 0 })
                 }

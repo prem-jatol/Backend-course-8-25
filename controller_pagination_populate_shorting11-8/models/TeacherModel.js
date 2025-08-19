@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const adminSchema = new mongoose.Schema({
+const teacherModel = new mongoose.Schema({
     name: {
         type: String,
         require: true,
@@ -12,20 +12,15 @@ const adminSchema = new mongoose.Schema({
         require: true,
         match: [/\S+@\S+\.\S+/, 'Invalid email format']
     },
-    password: {
-        type: Number,
+    father_name: {
+        type: String,
         require: true,
-    },
-    teacher: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Teacher"
+        maxlength: 20
     }
-}, 
-{
+}, {
     timestamps: true
-}
-)
+})
 
-const AdminModel = mongoose.model('Admin', adminSchema)
+const TeacherModel = mongoose.model('Teacher', teacherModel)
 
-module.exports = AdminModel;
+module.exports = TeacherModel;

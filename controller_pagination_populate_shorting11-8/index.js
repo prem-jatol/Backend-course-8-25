@@ -1,6 +1,7 @@
 const express = require('express'); // for api managment + server create
 const mongoose = require('mongoose'); // for connect mongodb database
 const AdminRouter = require('./routes/AdminRouter');
+const TeacherRouter = require('./routes/TeacherRouter');
 
 const PORT = 5000;
 
@@ -14,6 +15,7 @@ app.use(express.json())
 // app.get('/admin', (req, res)=>{})
 
 app.use('/admin', AdminRouter);
+app.use('/teacher', TeacherRouter)
 
 mongoose.connect('mongodb://localhost:27017/shool')
 .then(
