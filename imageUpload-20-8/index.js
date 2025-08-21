@@ -8,8 +8,12 @@ const PORT = 5000;
 
 const app = express();
 app.use(cors());
-app.use(express.json())
-app.use(express.static('public'))
+
+// app.use(cors(['http://localhost:5173/', 'http://localhost:2012/']));
+// app.use(cors(['https://www.codespazio.com', '']));
+
+app.use(express.json());
+app.use(express.static('public'));
 
 // mongoose.connect('mongodb://localhost:27017/', {
 //     dbName: "shool",

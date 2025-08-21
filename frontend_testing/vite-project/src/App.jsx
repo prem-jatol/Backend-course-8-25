@@ -32,7 +32,7 @@ export default function App() {
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
-    data.append("file", formData.image); // field name must match backend
+    data.append("image", formData.image); // field name must match backend
 
     try {
       const res = await axios.post("http://localhost:5000/admin/upload", data, {
@@ -51,6 +51,7 @@ export default function App() {
   return (
     <div style={{ maxWidth: "400px", margin: "20px auto" }}>
       <h2>Upload Form</h2>
+      {/* <img src="./image.jpg" alt="" /> */}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label><br />
