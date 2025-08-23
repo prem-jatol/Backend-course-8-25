@@ -23,6 +23,9 @@ const adminSchema = new mongoose.Schema({
     image: {
         type: String,
         default: null
+    },
+    images: {
+        type: Array,
     }
 }, 
 {

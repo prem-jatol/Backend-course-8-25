@@ -79,6 +79,55 @@ class AdminController {
             }
         });
     };
+
+    multiUpload = (data, images) => {
+        return new Promise(async (res, rej) => {
+            try {
+                console.log(images);
+                
+                let imageFiles = [];
+
+                // if only one file is uploaded, req.files.images will NOT be an array
+                if (!Array.isArray(images)) {
+                    images = [images];
+                }
+
+                for (let img of images) {
+                    // unique filename
+                    const imgName =
+                        Date.now() + "-" + Math.floor(Math.random() * 1000) + "-" + img.name;
+
+                    const uploadPath = `./public/images/${imgName}`;
+
+                    // move image to public/images
+                    await img.mv(uploadPath);
+
+                    // push filename to array
+                    imageFiles.push(imgName);
+                }
+
+                // Save data to DB
+                const admin = new AdminModel({
+                    name: data.name,
+                    email: data.email,
+                    password: data.password || 12345,
+                    teacher: data.teacher || null,
+                    images: imageFiles,
+                });
+
+                await admin.save();
+
+                res({
+                    msg: "Images uploaded successfully",
+                    status: 1,
+                    data: admin,
+                });
+            } catch (err) {
+                console.error(err);
+                rej({ msg: "Internal server error", status: 0 });
+            }
+        });
+    };
 }
 
 module.exports = AdminController;

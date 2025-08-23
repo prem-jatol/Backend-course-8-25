@@ -28,7 +28,7 @@ AdminRouter.post('/upload',
 AdminRouter.get('/', async (req, res) => {
 
     const admins = await AdminModel.find();
-    res.send({msg: "all admins", data: admins})
+    res.send({ msg: "all admins", data: admins })
 })
 
 
@@ -56,5 +56,23 @@ AdminRouter.put('/update',
             })
     }
 )
+
+AdminRouter.post('/upload-multiple',
+    fileUpload({
+        createParentPath: true
+    }),
+    (req, res) => {
+        const body = req.body;
+        const images = req.files.images;
+
+        const result = new AdminController().multiUpload(body, images)
+        result
+            .then((success) => {
+                res.send(success)
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+    })
 
 module.exports = AdminRouter;

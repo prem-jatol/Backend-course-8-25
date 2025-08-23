@@ -157,7 +157,7 @@ export default function UploadForm({ selectedId }) {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
+          className="w-full py-2 px-4 bg-blue-600 text-black font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
         >
           {selectedId ? "Update" : "Create"}
         </button>

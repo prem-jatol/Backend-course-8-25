@@ -8,7 +8,7 @@ export default function AdminList({ setSelectedId }) {
     // Fetch admins list
     useEffect(() => {
         axios
-            .get("http://localhost:5000/admin") // change URL to your backend
+            .get("http://localhost:5000/admin")
             .then((res) => {
                 setAdmins(res.data.data)
             })
