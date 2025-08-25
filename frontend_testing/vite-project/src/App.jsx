@@ -9,9 +9,9 @@ export default function App() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      {/* <ImageUploadForm selectedId={selectedId} /> */}
-      {/* <AdminList setSelectedId={setSelectedId} /> */}
-      <UploadMultipleImages />
+      <ImageUploadForm selectedId={selectedId} />
+      <AdminList setSelectedId={setSelectedId} />
+      {/* <UploadMultipleImages /> */}
     </div>
   );
 }
