@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = 'this_is_my_secret_key';
+require('dotenv').config();
+
+const SECRET_KEY = process.env.SECRET_KEY;
+
 
 function verifyToken(req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -9,9 +12,11 @@ function verifyToken(req, res, next) {
 
   jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
-    req.user = user; // Save user data from token
+    req.body.user = user; // Save user data from token
     next();
   });
 }
 
 module.exports = verifyToken;
+
+// fs.writeFile(path, data, (err)=> {})

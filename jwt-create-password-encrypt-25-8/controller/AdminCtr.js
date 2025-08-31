@@ -43,7 +43,7 @@ class AdminCtr {
                         )
                         .catch((err) => {
                             console.log(err);
-                            rej({ msg: "Error to create admin", status: 1 })
+                            rej({ msg: "Error to create admin", status: 0 })
 
                         })
                 } catch (err) {
@@ -67,7 +67,7 @@ class AdminCtr {
                             const data = { name: user.name, email: user.email, role: user.role };
                             const token = await generateToken(data);
 
-                            res({ msg: "Login successfully", status: 1, token: token })
+                            res({ msg: "Login successfully", status: 1, token: token, user })
                         } else {
                             rej({ msg: "Password not match", status: 0 })
                         }
@@ -87,7 +87,12 @@ class AdminCtr {
         return new Promise(
             async (res, rej) => {
                 try {
-                    const { name, email, password, role } = data;
+                    const { name, email, password, role, user } = data;
+                    console.log(user);
+                    
+                    if (user.role !== "student") {
+                        rej({msg: "Only student role admin can change profile"});
+                    }
                     const result = await AdminModel.findByIdAndUpdate(id, {
                         name: name,
                         email: email,
@@ -98,7 +103,7 @@ class AdminCtr {
                     if (!result) {
                         res({ msg: "Admin not found", status: 0 });
                     } else {
-                        res({ msg: "Admin updated successfully", status: 1, data: result });
+                        res({ msg: "Admin updated successfully", status: 1, user: result });
                     }
 
                 } catch (err) {

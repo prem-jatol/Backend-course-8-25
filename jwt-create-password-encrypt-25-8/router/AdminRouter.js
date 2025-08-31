@@ -18,7 +18,7 @@ AdminRouter.get('/', async (req, res) => {
 })
 
 
-AdminRouter.post('/create', async (req, res) => {
+AdminRouter.post('/register', async (req, res) => {
     const result = new AdminCtr().createAdmin(req.body);
     result.then(
         (success) => {
