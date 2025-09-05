@@ -25,6 +25,7 @@
 25. What is WebSockets and how to use it?
 26. How to make a Real-time chat application using WebSockets?
 27. How to send email using nodemailer?
-28. How to implement payment gateway using Razorpay or Stripe?
-29. A Backend project with AI Tool.
-30. how to deploy our backend for free?
+28. How to save token in Cookies or Session?
+29. How to implement payment gateway using Razorpay or Stripe?
+30. A Backend project with AI Tool.
+31. how to deploy our backend for free?
