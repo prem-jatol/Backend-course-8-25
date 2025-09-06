@@ -7,9 +7,9 @@ import TaskList from "../components/TaskList";
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    API.get("/tasks").then((res) => setTasks(res.data));
-  }, []);
+  // useEffect(() => {
+  //   API.get("/tasks").then((res) => setTasks(res.data));
+  // }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
