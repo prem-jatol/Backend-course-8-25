@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import API from "../api";
 import { db } from "../firebase";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, update, remove } from "firebase/database";
 
 export default function TaskList({ tasks, setTasks }) {
-  const [realtimeTask, setRealtimeTask] = useState({})
+  const [realtimeTask, setRealtimeTask] = useState([])
 
   const updateTask = async (id, updates) => {
-    const res = await API.put(`/tasks/${id}`, updates);
-    setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
+    // const res = await API.put(`/tasks/${id}`, updates);
+    // setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
+    update(ref(db, "tasks/" + id), updates);
   };
 
   const deleteTask = async (id) => {
-    await API.delete(`/tasks/${id}
-    setTasks(tasks.filter((t) => t._id !== id)`);
+    // await API.delete(`/tasks/${id}
+    // setTasks(tasks.filter((t) => t._id !== id)`);
+    remove(ref(db, "tasks/" + id));
   };
 
   useEffect(() => {
@@ -21,18 +23,21 @@ export default function TaskList({ tasks, setTasks }) {
       const tasksRef = ref(db, "tasks");
       onValue(tasksRef, (snapshot) => {
         const data = snapshot.val();
-        const tasksArray = Object.entries(data).map(([id, value]) => ({
-          id,
-          ...value
-        }));
+
+        const tasksArray = Object.entries(data).map(
+          ([id, value]) => {
+            return {
+              id, ...value
+            }
+          }
+        )
+
         setRealtimeTask(tasksArray);
       });
     };
 
     getTasks();
   }, [])
-// console.log(realtimeTask);
-
 
   return (
     <div className="space-y-3">
@@ -46,11 +51,11 @@ export default function TaskList({ tasks, setTasks }) {
             <p className="text-sm">Status: {task?.status}</p>
           </div>
           <div className="space-x-2">
-            <button onClick={() => updateTask(task.id, { status: task?.status === "pending" ? "done" : "pending" })}
-              className="bg-green-500 text-white px-2 py-1 rounded">
+            <button onClick={() => updateTask(task?.id, { status: task?.status === "pending" ? "done" : "pending" })}
+              className="bg-green-500 text-white px-2 py-1 rounded cursor-pointer">
               {task.status === "pending" ? "Mark Done" : "Mark Pending"}
             </button>
-            <button onClick={() => deleteTask(task?.id)} className="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+            <button onClick={() => deleteTask(task?.id)} className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer">Delete</button>
           </div>
         </div>
       ))}
