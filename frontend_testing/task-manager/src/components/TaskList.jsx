@@ -9,13 +9,17 @@ export default function TaskList({ tasks, setTasks }) {
   const updateTask = async (id, updates) => {
     // const res = await API.put(`/tasks/${id}`, updates);
     // setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
-    update(ref(db, "tasks/" + id), updates);
+
+    // Firbase db query
+    // update(ref(db, "tasks/" + id), updates);
   };
 
   const deleteTask = async (id) => {
     // await API.delete(`/tasks/${id}
     // setTasks(tasks.filter((t) => t._id !== id)`);
-    remove(ref(db, "tasks/" + id));
+
+    // Firbase db query
+    // remove(ref(db, "tasks/" + id));
   };
 
   useEffect(() => {
@@ -36,7 +40,8 @@ export default function TaskList({ tasks, setTasks }) {
       });
     };
 
-    getTasks();
+    // fibase db query
+    // getTasks();
   }, [])
 
   return (

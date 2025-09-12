@@ -3,6 +3,7 @@ import API from "../api";
 import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
+import ChatApp from "../components/ChatApp";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -17,6 +18,9 @@ export default function Tasks() {
       <div className="max-w-2xl mx-auto p-4">
         <TaskForm onTaskCreated={(task) => setTasks([task, ...tasks])} />
         <TaskList tasks={tasks} setTasks={setTasks} />
+      </div>
+      <div className="fixed bottom-10 right-10">
+        <ChatApp/>
       </div>
     </div>
   );
