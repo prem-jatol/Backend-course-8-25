@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import API from "../api";
-import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 import ChatApp from "../components/ChatApp";
+import Navbar from "../components/NavBar";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
+  const [isClose, setIsClose] = useState(false)
 
-  // useEffect(() => {
-  //   API.get("/tasks").then((res) => setTasks(res.data));
-  // }, []);
+  useEffect(() => {
+    API.get("/tasks").then((res) => setTasks(res.data));
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -20,7 +21,11 @@ export default function Tasks() {
         <TaskList tasks={tasks} setTasks={setTasks} />
       </div>
       <div className="fixed bottom-10 right-10">
-        <ChatApp/>
+        {isClose ?
+          <ChatApp onClose={() => setIsClose(false)} />
+          :
+          <span className="w-[50px] h-[50px] inline-block rounded-full bg-green-600 text-white text-center pt-3 cursor-pointer" onClick={() => setIsClose(true)}>Chat</span>
+        }
       </div>
     </div>
   );

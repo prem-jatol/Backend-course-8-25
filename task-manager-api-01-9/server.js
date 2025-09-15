@@ -18,6 +18,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRouter"));
 app.use("/api/tasks", require("./routes/taskRouter"));
 app.use("/api/chats", require("./routes/chatRouter"));
+app.use("/api/email", require("./routes/emailRouter"));
 
 const server = http.createServer(app);
 

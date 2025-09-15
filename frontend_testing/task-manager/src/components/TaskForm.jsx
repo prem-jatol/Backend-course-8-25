@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { db } from "../firebase";
 import { ref, set, push, update } from "firebase/database";
+import API from "../api";
 // import API from "../api";
 
 export default function TaskForm({ onTaskCreated }) {
@@ -10,10 +11,10 @@ export default function TaskForm({ onTaskCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const res = await API.post("/tasks", task);
-    const tasksRef = ref(db, "tasks");
-    const newTaskRef = push(tasksRef);
-    set(newTaskRef, task);
+    const res = await API.post("/tasks", task);
+    // const tasksRef = ref(db, "tasks");
+    // const newTaskRef = push(tasksRef);
+    // set(newTaskRef, task);
 
     // onTaskCreated(res.data);
     setTask({ title: "", description: "", priority: "medium" });

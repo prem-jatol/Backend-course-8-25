@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 
 const socket = io("http://localhost:4080");
 
-export default function ChatApp() {
+export default function ChatApp({onClose}) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [userList, setUserList] = useState([]);
@@ -61,7 +61,10 @@ export default function ChatApp() {
 
   return (
     <div className="w-[500px] bg-white p-5 rounded-lg">
-      <h2 className="text-3xl font-bold text-gray-700">Chat</h2>
+      <div className="flex justify-between">
+        <h2 className="text-3xl font-bold text-gray-700">Chat</h2>
+        <span className="p-3 rounded-full bg-gray-100 cursor-pointer" onClick={onClose}>X</span>
+      </div>
       {userList && (
         <select name="" id="" onChange={(e) => setReceiverId(e.target.value)} className="my-5">
           <option value="">Select user</option>

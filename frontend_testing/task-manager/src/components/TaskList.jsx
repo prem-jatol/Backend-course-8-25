@@ -7,16 +7,16 @@ export default function TaskList({ tasks, setTasks }) {
   const [realtimeTask, setRealtimeTask] = useState([])
 
   const updateTask = async (id, updates) => {
-    // const res = await API.put(`/tasks/${id}`, updates);
-    // setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
+    const res = await API.put(`/tasks/${id}`, updates);
+    setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
 
     // Firbase db query
     // update(ref(db, "tasks/" + id), updates);
   };
 
   const deleteTask = async (id) => {
-    // await API.delete(`/tasks/${id}
-    // setTasks(tasks.filter((t) => t._id !== id)`);
+    await API.delete(`/tasks/${id}`)
+    setTasks(tasks.filter((t) => t._id !== id));
 
     // Firbase db query
     // remove(ref(db, "tasks/" + id));
@@ -44,10 +44,13 @@ export default function TaskList({ tasks, setTasks }) {
     // getTasks();
   }, [])
 
+  console.log(tasks);
+
+
   return (
     <div className="space-y-3">
-      {/* {tasks?.tasks?.map((task) => ( */}
-      {realtimeTask?.map((task) => (
+      {/* {realtimeTask?.map((task) => ( */}
+      {tasks?.tasks?.map((task) => (
         <div key={task.id} className="bg-white p-4 rounded shadow flex justify-between items-center">
           <div>
             <h3 className="font-bold">{task?.title}</h3>
@@ -56,7 +59,7 @@ export default function TaskList({ tasks, setTasks }) {
             <p className="text-sm">Status: {task?.status}</p>
           </div>
           <div className="space-x-2">
-            <button onClick={() => updateTask(task?.id, { status: task?.status === "pending" ? "done" : "pending" })}
+            <button onClick={() => updateTask(task?._id, { status: task?.status === "pending" ? "done" : "pending" })}
               className="bg-green-500 text-white px-2 py-1 rounded cursor-pointer">
               {task.status === "pending" ? "Mark Done" : "Mark Pending"}
             </button>
