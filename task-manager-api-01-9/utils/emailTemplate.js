@@ -10,8 +10,8 @@ function taskSummaryTemplate({ userName, tasks }) {
         <td style="padding:8px;border:1px solid #ddd;">${task.title}</td>
         <td style="padding:8px;border:1px solid #ddd;">${task.status}</td>
         <td style="padding:8px;border:1px solid #ddd;">${new Date(
-          task.createdAt
-        ).toLocaleString()}</td>
+        task.createdAt
+      ).toLocaleString()}</td>
       </tr>`
     )
     .join("");
@@ -36,11 +36,9 @@ function taskSummaryTemplate({ userName, tasks }) {
     </table>
     
     <p style="margin-top:20px;">✔ Total Tasks: <b>${tasks.length}</b></p>
-    <p>✔ Completed: <b>${
-      tasks.filter((t) => t.status === "done").length
+    <p>✔ Completed: <b>${tasks.filter((t) => t.status === "done").length
     }</b></p>
-    <p>✔ Pending: <b>${
-      tasks.filter((t) => t.status !== "done").length
+    <p>✔ Pending: <b>${tasks.filter((t) => t.status !== "done").length
     }</b></p>
     
     <p style="margin-top:20px;">Thanks for using our Task Manager App 🚀</p>

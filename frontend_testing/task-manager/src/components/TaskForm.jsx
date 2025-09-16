@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { db } from "../firebase";
 import { ref, set, push, update } from "firebase/database";
 import API from "../api";
+import axios from "axios";
 // import API from "../api";
 
 export default function TaskForm({ onTaskCreated }) {
@@ -11,10 +12,16 @@ export default function TaskForm({ onTaskCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await API.post("/tasks", task);
+    // database api
+    // const res = await API.post("/tasks", task);
+
+    // firebase api query
     // const tasksRef = ref(db, "tasks");
     // const newTaskRef = push(tasksRef);
     // set(newTaskRef, task);
+
+    axios.post('http://localhost:4080/api/tasks', task, { withCredentials: true })
+      .then((success) => alert("task created"))
 
     // onTaskCreated(res.data);
     setTask({ title: "", description: "", priority: "medium" });

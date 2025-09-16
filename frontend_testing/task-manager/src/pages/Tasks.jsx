@@ -4,13 +4,15 @@ import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 import ChatApp from "../components/ChatApp";
 import Navbar from "../components/NavBar";
+import axios from "axios";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [isClose, setIsClose] = useState(false)
 
   useEffect(() => {
-    API.get("/tasks").then((res) => setTasks(res.data));
+    // API.get("/tasks").then((res) => setTasks(res.data));
+    axios.get('http://localhost:4080/api/tasks', { withCredentials: true }).then((res) => setTasks(res.data))
   }, []);
 
   return (

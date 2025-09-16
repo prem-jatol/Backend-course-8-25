@@ -8,7 +8,7 @@ const sendTaskSummary = async (req, res) => {
   try {
     const userId = req.userId; // from auth middleware (JWT etc.)
     const user = await User.findById(userId);
-    const tasks = await Task.find({ userId });
+    const tasks = await Task.find({ user: userId });
 
     const html = taskSummaryTemplate({
       userName: user.name,

@@ -4,6 +4,8 @@ const http = require("http");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const { Server } = require("socket.io");
+const cookieParser = require("cookie-parser");
+
 // new socket.Server()
 
 dotenv.config();
@@ -11,7 +13,12 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cookieParser());
+// app.use(cors)
+app.use(cors({
+    origin: "http://localhost:5173", // React frontend
+    credentials: true               // ✅ allow sending cookies
+}));
 app.use(express.json());
 
 

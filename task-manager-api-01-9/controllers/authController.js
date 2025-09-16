@@ -23,6 +23,15 @@ exports.login = async (req, res) => {
   if (!isMatch) return res.status(400).json({ error: "Invalid password" });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+  // ✅ Store token in HttpOnly cookie
+  res.cookie("token", token, {
+    httpOnly: true,   // JS can't access this cookie
+    secure: process.env.NODE_ENV === "production", // Only https in prod
+    sameSite: "lax", //strict or none
+    maxAge: 60 * 60 * 1000, // 1 hour
+  });
+
   res.json({ message: "Login successful", token, user });
 };
 
