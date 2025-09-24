@@ -25,7 +25,7 @@ export default function Payment() {
 
                     if (res.data.success) {
                         // Redirect after success ✅
-                        navigate("/payment-success");
+                        navigate(`/payment-success?orderId=${res.data.orderId}&paymentId=${res.data.paymentId}`);
                     } else {
                         alert("Payment verification failed!");
                     }
@@ -35,7 +35,7 @@ export default function Payment() {
                     email: "prem@example.com",
                     contact: "9876543210",
                 },
-                theme: { color: "#4F46E5" },
+                theme: { color: "#fbff09ff" },
             };
 
             const rzp = new window.Razorpay(options);

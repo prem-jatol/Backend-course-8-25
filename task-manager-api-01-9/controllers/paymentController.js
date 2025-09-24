@@ -44,7 +44,7 @@ exports.paymentVerify = async (req, res) => {
                 { orderId: razorpay_order_id },
                 { paymentId: razorpay_payment_id, signature: razorpay_signature, status: "success" }
             );
-            return res.json({ success: true, message: "Payment verified successfully" });
+            return res.json({ success: true, message: "Payment verified successfully", orderId: razorpay_order_id, paymentId: razorpay_payment_id });
         } else {
             return res.status(400).json({ success: false, message: "Invalid signature" });
         }
