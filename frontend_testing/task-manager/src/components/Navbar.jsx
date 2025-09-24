@@ -26,6 +26,7 @@ export default function Navbar() {
       <div className="space-x-4">
         <button onClick={() => getSummary()} className="p-2 rounded-lg bg-yellow-600 text-white cursor-pointer">Report</button>
         <Link to="/tasks">Tasks</Link>
+        <Link to="/payment">Plan</Link>
         <button onClick={logout} className="bg-red-500 px-3 py-1 rounded">
           Logout
         </button>
